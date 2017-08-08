@@ -27,7 +27,7 @@ exports.init = (function(_this) {
         },
         data: {
           payeeAlias: data.payeeAlias,
-          currency: (data.data. != null ? data.data.currency : void 0) != null ? data.data.currency : "SEK",
+          currency: (data.data != null ? data.data.currency : void 0) != null ? data.data.currency : "SEK",
           callbackUrl: data.data.callbackUrl
         }
       });
