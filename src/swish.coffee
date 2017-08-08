@@ -13,14 +13,14 @@ exports.init = (data) =>
   new Promise (resolve, reject) =>
     resolve config =
       cert:
-        key: fs.readFileSync data.key, 'ascii'
-        cert: fs.readFileSync data.cert, 'ascii'
-        ca: fs.readFileSync data.ca, 'ascii'
-        passphrase: data.passphrase
+        key: fs.readFileSync data.cert.key, 'ascii'
+        cert: fs.readFileSync data.cert.cert, 'ascii'
+        ca: fs.readFileSync data.cert.ca, 'ascii'
+        passphrase: data.cert.passphrase
       data:
         payeeAlias: data.payeeAlias
-        currency: if data?.currency? then data.currency else "SEK"
-        callbackUrl: data.callbackUrl
+        currency: if data?data.currency? then data.data.currency else "SEK"
+        callbackUrl: data.data.callbackUrl
 
 # GET payment (GET)
 exports.get = (id) ->
