@@ -20,15 +20,15 @@ exports.init = (function(_this) {
     return new Promise(function(resolve, reject) {
       return resolve(config = {
         cert: {
-          key: fs.readFileSync(data.key, 'ascii'),
-          cert: fs.readFileSync(data.cert, 'ascii'),
-          ca: fs.readFileSync(data.ca, 'ascii'),
-          passphrase: data.passphrase
+          key: fs.readFileSync(data.cert.key, 'ascii'),
+          cert: fs.readFileSync(data.cert.cert, 'ascii'),
+          ca: fs.readFileSync(data.cert.ca, 'ascii'),
+          passphrase: data.cert.passphrase
         },
         data: {
           payeeAlias: data.payeeAlias,
-          currency: (data != null ? data.currency : void 0) != null ? data.currency : "SEK",
-          callbackUrl: data.callbackUrl
+          currency: (data.data. != null ? data.data.currency : void 0) != null ? data.data.currency : "SEK",
+          callbackUrl: data.data.callbackUrl
         }
       });
     });
