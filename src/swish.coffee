@@ -18,7 +18,7 @@ exports.init = (data) =>
         ca: fs.readFileSync data.cert.ca, 'ascii'
         passphrase: data.cert.passphrase
       data:
-        payeeAlias: data.payeeAlias
+        payeeAlias: data.data.payeeAlias
         currency: if data?data.currency? then data.data.currency else "SEK"
         callbackUrl: data.data.callbackUrl
 

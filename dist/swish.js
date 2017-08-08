@@ -26,7 +26,7 @@ exports.init = (function(_this) {
           passphrase: data.cert.passphrase
         },
         data: {
-          payeeAlias: data.payeeAlias,
+          payeeAlias: data.data.payeeAlias,
           currency: (data.data != null ? data.data.currency : void 0) != null ? data.data.currency : "SEK",
           callbackUrl: data.data.callbackUrl
         }
