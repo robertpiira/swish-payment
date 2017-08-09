@@ -23,8 +23,6 @@ test('Successful flow (init -> add -> get)', t => {
     t.equal(configData.cert.passphrase, result.cert.passphrase, 'Found passphrase')
     t.equal(configData.data.payeeAlias, result.data.payeeAlias, 'Found payee alias')
     t.equal(configData.data.callbackUrl, result.data.callbackUrl, 'Found callback url')
-
-    t.end()
   })
 
   swish.add({
@@ -34,16 +32,30 @@ test('Successful flow (init -> add -> get)', t => {
     message: 'Prima snus'
   })
   .then(id => {
-    t.equal(id.length, 32, 'Response: 200 / valid ID (#{id})')
-    return swish.get(id)
+    t.equal(id.length, 32, `Response: 200 / valid ID (${id})`)
+
+    swish.get(id).then(result => {
+      t.equal(id, result.id, `Valid ID (${id})`)
+      t.equal(result.status, 'CREATED', 'Status: CREATED')
+      t.equal(result.payeePaymentReference, 'snus123', 'payeePaymentReference')
+      t.equal(result.paymentReference, null, 'paymentReference')
+      t.equal(result.errorMessage, null, 'errorMessage')
+      t.equal(result.errorCode, null, 'errorCode')
+      t.equal(result.callbackUrl, 'https://www.test.se', 'callbackUrl')
+      t.equal(result.payerAlias, '0706123456', 'payerAlias')
+      t.equal(result.payeeAlias, '1231181189', 'payeeAlias')
+      t.equal(result.amount, 100, 'amount')
+      t.equal(result.message, 'Prima snus', 'message')
+      t.equal(!!result.dateCreated, true, 'dateCreated')
+      t.equal(result.datePaid, null, 'datePaid')
+      t.equal(result.currency, 'SEK', 'currency')
+      t.end()
+    })
+    .catch(err => {
+      t.fail(JSON.stringify(error))
+      t.end()
+    })
   })
-  .then(result => {
-    t.equal(id, result.id, 'Response: 200 / found (#{id})')
-    t.end()
-  })
-  .catch(err => {
-    t.fail(JSON.stringify(error))
-    t.end()
-  })
+
 
 })
