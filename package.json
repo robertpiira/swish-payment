@@ -4,7 +4,7 @@
   "description": "Node.js library for the Swish Handel API (Swedish mobile payment solution)",
   "main": "dist/swish.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "babel-tape-runner \"tests/tests.js\" | faucet"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "async": "^2.0.0-rc.6",
+    "faucet": "0.0.1",
     "tape": "^4.5.1"
   }
 }

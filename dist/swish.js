@@ -17,7 +17,10 @@ config = null;
 
 exports.init = (function(_this) {
   return function(data) {
+
     return new Promise(function(resolve, reject) {
+
+
       return resolve(config = {
         cert: {
           key: fs.readFileSync(data.cert.key, 'ascii'),
