@@ -3,9 +3,13 @@ request = require "request"
 R = require 'ramda'
 fs = require "fs"
 
-urls =
+testUrls =
   payment: "https://swicpc.bankgirot.se/swish-cpcapi/api/v1/paymentrequests/"
   refund: "https://swicpc.bankgirot.se/swish-cpcapi/api/v1/refunds/"
+
+urls =
+  payment: "https://mss.swicpc.bankgirot.se/swish-cpcapi/api/v1/paymentrequests/"
+  refund: "https://mss.swicpc.bankgirot.se/swish-cpcapi/api/v1/refunds/"
 
 config = null
 

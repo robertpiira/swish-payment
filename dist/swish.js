@@ -1,4 +1,4 @@
-var Promise, R, config, fs, request, urls;
+var Promise, R, config, fs, request, urls, testUrls;
 
 Promise = require("promise");
 
@@ -8,12 +8,25 @@ R = require('ramda');
 
 fs = require("fs");
 
+testUrls = {
+  payment: "https://mss.swicpc.bankgirot.se/swish-cpcapi/api/v1/paymentrequests/",
+  refund: "https://mss.swicpc.bankgirot.se/swish-cpcapi/api/v1/refunds/"
+};
+
 urls = {
   payment: "https://swicpc.bankgirot.se/swish-cpcapi/api/v1/paymentrequests/",
   refund: "https://swicpc.bankgirot.se/swish-cpcapi/api/v1/refunds/"
 };
 
 config = null;
+
+var getUrls = function (isTestEnv) {
+  if (isTestEnv) {
+    return testUrls
+  } else {
+    return urls
+  }
+}
 
 exports.init = (function(_this) {
   return function(data) {
@@ -22,6 +35,7 @@ exports.init = (function(_this) {
 
 
       return resolve(config = {
+        isTestEnv: data.isTestEnv,
         cert: {
           key: fs.readFileSync(data.cert.key, 'ascii'),
           cert: fs.readFileSync(data.cert.cert, 'ascii'),
@@ -43,7 +57,7 @@ exports.get = function(id) {
     var options;
     options = R.merge(config.cert, {
       method: 'get',
-      url: urls.payment + id
+      url: getUrls(config.isTestEnv).payment + id
     });
     return request(options, function(err, response) {
       if (response.statusCode === 200) {
@@ -63,7 +77,7 @@ exports.add = function(data) {
     var options;
     options = R.merge(config.cert, {
       method: 'post',
-      url: urls.payment,
+      url: getUrls(config.isTestEnv).payment,
       body: R.merge(config.data, data),
       json: true
     });

@@ -4,6 +4,7 @@ const swish = require('../dist/swish')
 test('Successful flow (init -> add -> get)', t => {
 
   const configData = {
+    isTestEnv: true,
     cert: {
       key: './fixtures/swish.key',
       cert: './fixtures/swish.crt',
