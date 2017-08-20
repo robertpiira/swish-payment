@@ -4,8 +4,8 @@ R = require 'ramda'
 fs = require "fs"
 
 urls =
-  payment: "https://mss.swicpc.bankgirot.se/swish-cpcapi/api/v1/paymentrequests/"
-  refund: "https://mss.swicpc.bankgirot.se/swish-cpcapi/api/v1/refunds/"
+  payment: "https://swicpc.bankgirot.se/swish-cpcapi/api/v1/paymentrequests/"
+  refund: "https://swicpc.bankgirot.se/swish-cpcapi/api/v1/refunds/"
 
 config = null
 
