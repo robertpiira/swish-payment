@@ -82,10 +82,11 @@ exports.add = function(data) {
       json: true
     });
     return request(options, function(err, response) {
+      var paymentRequestToken = response.headers.paymentrequesttoken
       var location, ref, ref1;
       location = response != null ? (ref = response.caseless) != null ? (ref1 = ref.dict) != null ? ref1.location : void 0 : void 0 : void 0;
       if (location) {
-        return resolve(location.slice(location.lastIndexOf('/') + 1));
+        return resolve(location.slice(location.lastIndexOf('/') + 1), paymentRequestToken);
       } else {
         return reject((response != null ? response.body : void 0) != null ? response.body : {
           err: "unknown"
