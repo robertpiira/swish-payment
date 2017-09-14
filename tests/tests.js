@@ -32,11 +32,11 @@ test('Successful flow (init -> add -> get)', t => {
     amount: '100',
     message: 'Prima snus'
   })
-  .then(id => {
-    t.equal(id.length, 32, `Response: 200 / valid ID (${id})`)
+  .then(({swishId}) => {
+    t.equal(swishId.length, 32, `Response: 200 / valid ID (${swishId})`)
 
-    swish.get(id).then(result => {
-      t.equal(id, result.id, `Valid ID (${id})`)
+    swish.get(swishId).then(result => {
+      t.equal(swishId, result.id, `Valid ID (${swishId})`)
       t.equal(result.status, 'CREATED', 'Status: CREATED')
       t.equal(result.payeePaymentReference, 'snus123', 'payeePaymentReference')
       t.equal(result.paymentReference, null, 'paymentReference')
